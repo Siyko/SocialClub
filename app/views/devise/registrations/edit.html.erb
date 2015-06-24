@@ -25,11 +25,13 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
+<% if Identity.find_by_user_id(@user.id).nil? %>
+        <div class="field">
+          <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+          <%= f.password_field :current_password, autocomplete: "off" %>
+        </div>
+    <% end %>
 
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
-  </div>
     <div class="field">
       <%= f.label :number %><br />
       <%= f.text_field :number %>
