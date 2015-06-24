@@ -27,6 +27,7 @@ gem 'activeadmin', '~> 1.0.0.pre1'
 gem "paperclip", "~> 4.2"
 gem 'omniauth-facebook'
 gem 'omniauth-gplus', '~> 2.0'
+gem "omniauth-google-oauth2"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

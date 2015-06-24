@@ -15,7 +15,7 @@ Devise.setup do |config|
   config.confirmation_keys = [ :username ]
   #config.omniauth :facebook, "1561711017424351", "7192720424b187ed90498ff703b4a041"
   config.omniauth :facebook, "461381654025938", "efe8b27a2bd536352e4a83f2849dcb88"
-  config.omniauth :gplus, "AIzaSyATNl7AMmJBlSBta3VtfVQUUmP1_cRP_C0", "Z7EkA32ZuUItrcdn0o-rGPvb"
+  config.omniauth :google_oauth2, "701207958281-ia15pr9r2pdafieqr9ligu1bpbdbii4n.apps.googleusercontent.com", "nLdB53JV1IpCi1ygvY9WIimX", { }
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
 
