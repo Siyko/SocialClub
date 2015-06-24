@@ -25,6 +25,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 gem 'activeadmin', '~> 1.0.0.pre1'
 gem "paperclip", "~> 4.2"
+gem 'omniauth-facebook'
+gem 'omniauth-gplus', '~> 2.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
