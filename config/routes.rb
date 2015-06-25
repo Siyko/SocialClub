@@ -9,7 +9,9 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   #resources :users do
-    resources :tasks
+  resources :tasks do
+    resources :comments
+  end
   #end
    root 'home#index'
   match '/:id', :to => "tasks#show", :as => :task_id, :via => :get

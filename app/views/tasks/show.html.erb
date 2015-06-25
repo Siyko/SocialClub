@@ -17,5 +17,16 @@
 
 <% if @task.user_id == current_user.id%>
     <%= link_to 'Edit', edit_task_path %>
-    <% end %>
+<% end %>
+<br>
+<%= render @task.comments %>
+
+<%= form_for([@task, @task.comments.build]) do |f| %>
+   <p>
+     <%= f.text_area :body %>
+    </p>
+    <p>
+      <%= f.submit 'Add comment' %>
+    </p>
+<% end %>
 <%= link_to 'Back', tasks_path %>

@@ -1,0 +1,12 @@
+<% if @task.comments.empty? %>
+    <i>No comments</i>
+<% else %>
+    <h4>Comments</h4>
+
+        <p>
+          <%= User.find(comment.user_id).username%>:
+          <br>
+          <%= comment.body %>
+        </p>
+
+<% end %>
