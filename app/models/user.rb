@@ -11,7 +11,9 @@ class User < ActiveRecord::Base
             :presence => true,
             :uniqueness => {
                 :case_sensitive => false
+
             }
+  before_save :admin, :on => :create
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
@@ -30,6 +32,9 @@ class User < ActiveRecord::Base
 
   validates_format_of :email, :with => TEMP_EMAIL_REGEX, on: :update
 
+  def admin
+
+  end
   def self.find_for_oauth(auth, signed_in_resource = nil)
 
     # Get the identity and user if they exist
@@ -64,6 +69,7 @@ class User < ActiveRecord::Base
       end
     end
 
+
     # Associate the identity with the user if needed
     if identity.user != user
       identity.user = user
@@ -71,7 +77,6 @@ class User < ActiveRecord::Base
     end
     user
   end
-
   def email_verified?
     self.email && self.email !~ TEMP_EMAIL_REGEX
   end
