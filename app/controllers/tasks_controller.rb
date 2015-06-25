@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+  before_action :check_user, only: [:show, :edit]
   def index
     @tasks = Task.all
   end
@@ -50,8 +51,15 @@ class TasksController < ApplicationController
       end
   end
 
-  private
 
+
+  private
+  def check_user
+    @task = Task.find_by_task_id(params[:id])
+    if @task.user_id != current_user.id
+      redirect_to tasks_path, flash: {:notice => 'No permissions!'}
+    end
+  end
   def task_params
     params.require(:task).permit(:title, :text, :attachment)
   end
