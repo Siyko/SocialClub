@@ -73,10 +73,10 @@ ActiveRecord::Schema.define(version: 20150625102617) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "tasks", id: false, force: :cascade do |t|
+  create_table "tasks", force: :cascade do |t|
     t.string   "title"
     t.text     "text"
-    t.string   "task_id",                 null: false
+    t.string   "task_id"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.integer  "user_id"
@@ -87,7 +87,6 @@ ActiveRecord::Schema.define(version: 20150625102617) do
     t.integer  "task_status_id"
   end
 
-  add_index "tasks", ["task_id"], name: "index_tasks_on_task_id", unique: true
   add_index "tasks", ["task_status_id"], name: "index_tasks_on_task_status_id"
   add_index "tasks", ["user_id"], name: "index_tasks_on_user_id"
 

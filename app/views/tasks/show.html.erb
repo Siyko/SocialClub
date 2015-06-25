@@ -19,14 +19,14 @@
     <%= link_to 'Edit', edit_task_path %>
 <% end %>
 <br>
+<p id="notice"><%= notice %></p>
+<% if @task.comments.empty? %>
+    <i>No comments</i>
+    <% else %>
+    <i>Comments:</i>
 <%= render @task.comments %>
+    <% end %>
 
-<%= form_for([@task, @task.comments.build]) do |f| %>
-   <p>
-     <%= f.text_area :body %>
-    </p>
-    <p>
-      <%= f.submit 'Add comment' %>
-    </p>
-<% end %>
+<%= render 'comments/form' %>
+
 <%= link_to 'Back', tasks_path %>

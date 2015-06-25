@@ -1,12 +1,13 @@
-<% if @task.comments.empty? %>
-    <i>No comments</i>
-<% else %>
-    <h4>Comments</h4>
+<p>
+  <%= User.find(comment.user_id).username%>:
+  <br>
+  <%= comment.body %>
+</p>
 
-        <p>
-          <%= User.find(comment.user_id).username%>:
-          <br>
-          <%= comment.body %>
-        </p>
-
+<% if comment.user_id == current_user.id %>
+  <p>
+  <%= link_to 'Delete comment', [comment.task, comment],
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %>
+  </p>
 <% end %>
