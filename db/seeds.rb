@@ -6,5 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 TaskStatus.delete_all
+User.delete_all
 TaskStatus.create(status: 'New')
 TaskStatus.create(status: 'Closed')
+User.create(username: 'Admin', email: 'admin@example.com', password: 'password', admin: true, confirmation_token: nil, confirmed_at: '2015-06-25 14:34:42.025673' )
