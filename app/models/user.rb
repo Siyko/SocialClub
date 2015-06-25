@@ -1,9 +1,11 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  has_many :tasks
+  has_many :tasks, dependent: :destroy
+  has_many :comments, dependent: :destroy
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,:omniauthable, :confirmable,:authentication_keys => [:login]
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable, :omniauthable,
+         :authentication_keys => [:login]
   attr_accessor :login
   validates :username,
             :presence => true,
@@ -46,7 +48,7 @@ class User < ActiveRecord::Base
       # If no verified email was provided we assign a temporary email and ask the
       # user to verify it on the next step via UsersController.finish_signup
       email_is_verified = auth.info.email && (auth.info.verified || auth.info.verified_email)
-      email = auth.info.email if email_is_verified
+      email = auth.info.email #if email_is_verified
       user = User.where(:email => email).first if email
 
       # Create the user if it's a new registration
@@ -54,8 +56,8 @@ class User < ActiveRecord::Base
         user = User.new(
             #name: auth.extra.raw_info.name,
             username: auth.info.nickname || auth.uid,
-            email: email ? email : "#{email}-#{auth.uid}-#{auth.provider}.com"#,
-            #password: Devise.friendly_token[0,20]
+            email: email ? email : "#{email}-#{auth.uid}-#{auth.provider}.com",
+            password: Devise.friendly_token[0,20]
         )
         user.skip_confirmation!
         user.save!

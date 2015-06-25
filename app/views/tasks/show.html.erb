@@ -17,5 +17,16 @@
 
 <% if @task.user_id == current_user.id%>
     <%= link_to 'Edit', edit_task_path %>
+<% end %>
+<br>
+<p id="notice"><%= notice %></p>
+<% if @task.comments.empty? %>
+    <i>No comments</i>
+    <% else %>
+    <i>Comments:</i>
+<%= render @task.comments %>
     <% end %>
+
+<%= render 'comments/form' %>
+
 <%= link_to 'Back', tasks_path %>

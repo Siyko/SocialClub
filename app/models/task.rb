@@ -1,7 +1,7 @@
 class Task < ActiveRecord::Base
   belongs_to :user
-  self.primary_key = :task_id
-  has_attached_file :attachment,
+  has_many :comments
+ has_attached_file :attachment,
                     :path => ":rails_root/public/system/:attachment/:id/:basename_:style.:extension",
                     :url => "/system/:attachment/:id/:basename_:style.:extension",
                     :styles => {
