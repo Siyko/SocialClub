@@ -1,7 +1,11 @@
 class TasksController < ApplicationController
   before_action :check_user, only: [:show, :edit]
   def index
-    @tasks = Task.all
+    if current_user.admin?
+      @tasks = Task.all
+    else
+      @tasks = current_user.tasks
+    end
   end
 
   def show
@@ -56,8 +60,8 @@ class TasksController < ApplicationController
   private
   def check_user
     @task = Task.find_by_task_id(params[:id])
-    if @task.user_id != current_user.id
-      redirect_to tasks_path, flash: {:notice => 'No permissions!'}
+    if @task.user_id != current_user.id && !current_user.admin?
+      redirect_to tasks_path, flash: {:notice => 'No params[:]                                                                                                                                                                                                                                                                                              ermissions!'}
     end
   end
   def task_params
