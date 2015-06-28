@@ -1,9 +1,13 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
-
+  before_action :check_admin, except: [:edit, :update, :destroy]
+  def index
+    @users = User.all
+  end
   def show
-    # authorize! :read, @user
+   if !@user
+      redirect_to users_path, :notice => 'User not found'
+   end
   end
 
   # GET /users/:id/edit
@@ -13,7 +17,6 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/:id.:format
   def update
-    # authorize! :update, @user
     respond_to do |format|
       if @user.update(user_params)
         sign_in(@user == current_user ? @user : current_user, :bypass => true)
@@ -49,11 +52,20 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  def change_admin
+    redirect_to tasks_path
+  end
   private
   def set_user
-    @user = User.find(params[:id])
+    @user = User.find_by_username(params[:id])
   end
+
+  def check_admin
+    if !current_user.admin?
+      redirect_to root_path, flash: {:notice => 'Only admins have permissions to look at users!'}
+    end
+  end
+
 
 
   def user_params

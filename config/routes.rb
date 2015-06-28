@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   get 'home/index'
+  get 'users/change_admin'
   devise_for :users, :controllers => { omniauth_callbacks: 'omniauth_callbacks',
   registrations: 'user_registrations'
   }
@@ -8,13 +9,13 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  #resources :users do
+  resources :users
+
   resources :tasks do
     resources :comments
   end
   #end
    root 'home#index'
-  match '/:id', :to => "tasks#show", :as => :task_id, :via => :get
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

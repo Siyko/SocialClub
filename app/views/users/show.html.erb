@@ -1,0 +1,34 @@
+<h3>
+  <%= @user.username %>
+</h3>
+<p>
+  <strong>
+    Email:
+  </strong>
+  <%= @user.email %>
+</p>
+<p>
+  <strong>
+    Telephone:
+  </strong>
+  <%= @user.number %>
+</p>
+<p>
+  <strong>
+    Registered at:
+  </strong>
+  <%= @user.created_at %>
+</p>
+<p>
+  <strong>
+    Last sign in at:
+  </strong>
+  <%= @user.last_sign_in_at %>
+</p>
+<p>
+<strong>Admin</strong>
+<%= check_box_tag @user, @user.id, @user.admin? %>
+</p>
+<p>
+  <%= button_to 'Change admin', users_change_admin_path %>
+</p>
