@@ -4,7 +4,6 @@ class CreateTasks < ActiveRecord::Migration
       t.string :title
       t.text :text
       t.string :task_id#, null: false
-
       t.timestamps null: false
 
     end

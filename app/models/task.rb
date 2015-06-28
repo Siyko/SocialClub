@@ -1,5 +1,6 @@
 class Task < ActiveRecord::Base
   belongs_to :user
+  belongs_to :task_status
   has_many :comments
  has_attached_file :attachment,
                     :path => ":rails_root/public/system/:attachment/:id/:basename_:style.:extension",

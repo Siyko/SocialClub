@@ -1,10 +1,31 @@
 class TasksController < ApplicationController
   before_action :check_user, only: [:show, :edit]
   def index
+    @new_tasks = []
+    @closed_tasks = []
+    @statuses = TaskStatus.all
     if current_user.admin?
-      @tasks = Task.all
+      Task.all.each do |t|
+        status =  @statuses.find(t.task_status_id)
+        if status.status == 'New'
+           @new_tasks << t
+         else
+           if status.status == 'Closed'
+             @closed_tasks << t
+           end
+         end
+      end
     else
-      @tasks = current_user.tasks
+      current_user.tasks.each do |t|
+        status =  @statuses.find(t.task_status_id)
+        if status.status == 'New'
+          @new_tasks << t
+        else
+          if status.status == 'Closed'
+            @closed_tasks << t
+          end
+        end
+      end
     end
   end
 
