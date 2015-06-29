@@ -14,7 +14,8 @@ Devise.setup do |config|
   config.reset_password_keys = [ :username ]
   config.confirmation_keys = [ :username ]
   config.omniauth :facebook, "461381654025938", "efe8b27a2bd536352e4a83f2849dcb88"
-  config.omniauth :gplus, "AIzaSyATNl7AMmJBlSBta3VtfVQUUmP1_cRP_C0", "Z7EkA32ZuUItrcdn0o-rGPvb"
+  config.omniauth :google_oauth2, "195181451940-24mh6e1aluorjd5ujinp42k2mlacv0q5.apps.googleusercontent.com", "Z7EkA32ZuUItrcdn0o-rGPvb", { }
+  #config.omniauth :gplus, "195181451940-24mh6e1aluorjd5ujinp42k2mlacv0q5.apps.googleusercontent.com", "Z7EkA32ZuUItrcdn0o-rGPvb"
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
 

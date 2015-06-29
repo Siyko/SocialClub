@@ -11,7 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150624095856) do
+ActiveRecord::Schema.define(version: 20150625102144) do
+
+  create_table "attachments", force: :cascade do |t|
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.string   "name"
+    t.string   "attachment_type"
+    t.integer  "entity_id"
+    t.string   "entity_type"
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
+  end
+
+  add_index "attachments", ["entity_type", "entity_id"], name: "index_attachments_on_entity_type_and_entity_id"
+
+  create_table "comments", force: :cascade do |t|
+    t.integer  "task_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text     "body"
+  end
 
   create_table "identities", force: :cascade do |t|
     t.integer  "user_id"
@@ -29,21 +52,16 @@ ActiveRecord::Schema.define(version: 20150624095856) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "tasks", id: false, force: :cascade do |t|
+  create_table "tasks", force: :cascade do |t|
     t.string   "title"
     t.text     "text"
-    t.string   "task_id",                 null: false
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.string   "task_id",        null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.integer  "user_id"
-    t.string   "attachment_file_name"
-    t.string   "attachment_content_type"
-    t.integer  "attachment_file_size"
-    t.datetime "attachment_updated_at"
     t.integer  "task_status_id"
   end
 
-  add_index "tasks", ["task_id"], name: "index_tasks_on_task_id", unique: true
   add_index "tasks", ["task_status_id"], name: "index_tasks_on_task_status_id"
   add_index "tasks", ["user_id"], name: "index_tasks_on_user_id"
 

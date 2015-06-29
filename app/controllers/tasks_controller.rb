@@ -31,7 +31,7 @@ class TasksController < ApplicationController
     @task.user_id = current_user.id
     @task.task_status_id = TaskStatus.find_by_status('New').id
     if @task.save
-      redirect_to @task
+       redirect_to @task
     else
       render 'new'
     end
@@ -53,8 +53,9 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:title, :text, :attachment)
+    params.require(:task).permit(:title, :text, attachments_attributes:[:attachment])
   end
+
   def generate_id(params)
     3.times.map { (params).to_a.sample }.join
   end

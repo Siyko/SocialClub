@@ -24,8 +24,9 @@
       <%= f.text_area :text %>
     </p>
     <div class="field">
-      <%= f.label :attachment %><br>
-      <%= f.file_field :attachment %>
+      <%= f.fields_for :attachments, Attachment.new do |t| %>
+          File  : <%= t.file_field :attachment%>
+      <% end %>
     </div>
     <p>
       <%= f.submit %>

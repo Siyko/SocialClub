@@ -7,15 +7,18 @@
   <strong> Text:</strong>
   <%= @task.text %>
 </p>
-<% if @task.attachment_file_name %>
-<p>
-  <strong>File:</strong>
-  <br>
-  <%= image_tag @task.attachment.url(:large) %>
-</p>
-    <% end %>
+
 
 <% if @task.user_id == current_user.id%>
     <%= link_to 'Edit', edit_task_path %>
     <% end %>
+<p id="notice"><%= notice %></p>
+<% if @task.comments.empty? %>
+        <i>No comments</i>
+        <% else %>
+       <i>Comments:</i>
+    <%= render @task.comments %>
+        <% end %>
+
+<%= render 'comments/form' %>
 <%= link_to 'Back', tasks_path %>

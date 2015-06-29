@@ -1,0 +1,13 @@
+<%= form_for([@task, @task.comments.build]) do |f| %>
+      <p>
+        <%= f.text_area :body %>
+      </p>
+    <p>
+      <%= f.fields_for :attachments, Attachment.new do |t| %>
+          File  : <%= t.file_field :attachment %>
+      <% end %>
+    </p>
+       <p>
+        <%= f.submit 'Add a comment'%>
+      </p>
+    <% end %>
